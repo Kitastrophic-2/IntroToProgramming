@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class SimplePlayerController : MonoBehaviour
 {
@@ -29,22 +30,22 @@ public class SimplePlayerController : MonoBehaviour
         //Then we use if statement to figure out what that variable should look like
         
         //If I hold the right arrow key, the player should move right. . .
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Keyboard.current.rightArrowKey.isPressed)
         {
             vel.x = Speed;
         }
         //If I hold the left arrow, the player should move left. . .
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Keyboard.current.leftArrowKey.isPressed)
         {
             vel.x = -Speed;
         }
         //If I hold the up arrow, the player should move up. . .
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Keyboard.current.upArrowKey.isPressed)
         {
             vel.y = Speed;
         }
         //If I hold the down arrow, the player should move down. . .
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Keyboard.current.downArrowKey.isPressed)
         {
             vel.y = -Speed;
         }
