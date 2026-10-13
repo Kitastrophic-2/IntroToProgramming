@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -73,40 +74,48 @@ public class PlayerScript : MonoBehaviour
             {
                 currentSpeed = Speed;
             }
-
-
-
-            //The code below controls the character's movement
-            //First we make a variable that we'll use to record how we want to move
-            Vector2 vel = new Vector2(0, 0);
-
-            //Then we use if statement to figure out what that variable should look like
-
-            //If I hold the right arrow key, the player should move right. . .
-            if (Keyboard.current.rightArrowKey.isPressed)
-            {
-                vel.x = currentSpeed;
-            }
-            //If I hold the left arrow, the player should move left. . .
-            if (Keyboard.current.leftArrowKey.isPressed)
-            {
-                vel.x = -currentSpeed;
-            }
-            //If I hold the up arrow, the player should move up. . .
-            if (Keyboard.current.upArrowKey.isPressed)
-            {
-                vel.y = currentSpeed;
-            }
-            //If I hold the down arrow, the player should move down. . .
-            if (Keyboard.current.downArrowKey.isPressed)
-            {
-                vel.y = -currentSpeed;
-            }
-
-            //Finally, I take that variable and I feed it to the component in charge of movement
-            RB.linearVelocity = vel;
         }
+
+        //Finally, I take that variable and I feed it to the component in charge of movement
+        Vector3 velocity = Move(currentSpeed);
+        //once we've gotten the return value from our Move() function, we can set player RB
+        RB.linearVelocity = velocity;
     }
+
+    //prefix (scope) [return type] name(parameters
+    //this is a modular function that takes speed value and calculates a move vector
+    //based off the player inputs when the function is called (in update)
+    private Vector3 Move(float currentSpeed)
+    {
+        //The code below controls the character's movement
+        //First we make a variable that we'll use to record how we want to move
+        Vector2 vel = new Vector2(0, 0);
+
+        //Then we use if statement to figure out what that variable should look like
+
+        //If I hold the right arrow key, the player should move right. . .
+        if (Keyboard.current.rightArrowKey.isPressed)
+        {
+            vel.x = currentSpeed;
+        }
+        //If I hold the left arrow, the player should move left. . .
+        if (Keyboard.current.leftArrowKey.isPressed)
+        {
+            vel.x = -currentSpeed;
+        }
+        //If I hold the up arrow, the player should move up. . .
+        if (Keyboard.current.upArrowKey.isPressed)
+        {
+            vel.y = currentSpeed;
+        }
+        //If I hold the down arrow, the player should move down. . .
+        if (Keyboard.current.downArrowKey.isPressed)
+        {
+            vel.y = -currentSpeed;
+        }
+        return vel;
+    }
+
     //This gets called whenever you bump into another object, like a wall or coin.
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -115,7 +124,6 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.CompareTag("Hazard"))
         {
             //Take damage
-            Health--;
             UpdateHealth();
             //Check to see if health is 0 or lower
             if (Health <= 0)
