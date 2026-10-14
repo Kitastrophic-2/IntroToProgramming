@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
-public class GameOverScript : MonoBehaviour
+public class RestartGameScript : MonoBehaviour
 {
     //This script controls what happens on the Game Over screen
     //Currently, the only option is for the player to hit 'Space' and restart the game

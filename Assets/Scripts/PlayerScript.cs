@@ -9,6 +9,7 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerScript : MonoBehaviour
 {
+    public bool grounded;
     //These are the player's Variables, the raw info that defines them
     
     //The Rigidbody2D is a component that gives the player physics, and is what we use to move
@@ -103,16 +104,6 @@ public class PlayerScript : MonoBehaviour
         {
             vel.x = -currentSpeed;
         }
-        //If I hold the up arrow, the player should move up. . .
-        if (Keyboard.current.upArrowKey.isPressed)
-        {
-            vel.y = currentSpeed;
-        }
-        //If I hold the down arrow, the player should move down. . .
-        if (Keyboard.current.downArrowKey.isPressed)
-        {
-            vel.y = -currentSpeed;
-        }
         return vel;
     }
 
@@ -124,6 +115,7 @@ public class PlayerScript : MonoBehaviour
         if (other.gameObject.CompareTag("Hazard"))
         {
             //Take damage
+            Health--;
             UpdateHealth();
             //Check to see if health is 0 or lower
             if (Health <= 0)
@@ -146,6 +138,11 @@ public class PlayerScript : MonoBehaviour
             //And then update the game's score text
             UpdateScore();
         }
+
+        if (other.gameObject.CompareTag("Wall"))
+        {
+            Win();
+        }
     }
 
     //This function updates the game's score text to show how many points you have
@@ -165,5 +162,10 @@ public class PlayerScript : MonoBehaviour
     public void Die()
     {
         SceneManager.LoadScene("Game Over");
+    }
+
+    public void Win()
+    {
+        SceneManager.LoadScene("You Win");
     }
 }
