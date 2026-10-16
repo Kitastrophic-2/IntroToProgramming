@@ -30,10 +30,6 @@ public class PlayerScript : MonoBehaviour
     //This is the current player health
     public int Health = 3;
 
-    //Float to track cooldown time for the dash?
-    public float dashTimer = 0f;
-    public float dashReset = 2f;
-
     //for gravity
     public bool grounded;
 
@@ -50,39 +46,6 @@ public class PlayerScript : MonoBehaviour
     //Most of an object's code will be called from Update--it controls things that happen in real time
     void Update()
     {
-
-        //check to see if dash is on cooldown
-        if (dashTimer > 2f)
-        {
-            //if it is, count down the reset timer
-            dashReset -= Time.deltaTime;
-        }
-
-        //if dash reset is up, cycle the timers back
-        if (dashReset <= 0f)
-        {
-            dashTimer = 0f;
-            dashReset = 2f;
-        }
-
-        float currentSpeed = Speed;
-        if (dashTimer <= 2)
-        {
-            if (Keyboard.current.rightShiftKey.isPressed || Keyboard.current.leftShiftKey.isPressed)
-            {
-                currentSpeed = Speed * 2f;
-                dashTimer += Time.deltaTime;
-            }
-            else
-            {
-                currentSpeed = Speed;
-            }
-        }
-
-        //Finally, I take that variable and I feed it to the component in charge of movement
-        Vector3 velocity = Move(currentSpeed);
-        //once we've gotten the return value from our Move() function, we can set player RB
-        RB.linearVelocity = velocity;
     }
 
     //prefix (scope) [return type] name(parameters
@@ -97,12 +60,12 @@ public class PlayerScript : MonoBehaviour
         //Then we use if statement to figure out what that variable should look like
 
         //If I hold the right arrow key, the player should move right. . .
-        if (Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.dKey.isPressed)
         {
             vel.x = currentSpeed;
         }
         //If I hold the left arrow, the player should move left. . .
-        if (Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.aKey.isPressed)
         {
             vel.x = -currentSpeed;
         }
@@ -141,7 +104,7 @@ public class PlayerScript : MonoBehaviour
             UpdateScore();
         }
 
-        if (other.gameObject.CompareTag("Wall"))
+        if (other.gameObject.CompareTag("Goal"))
         {
             Win();
         }

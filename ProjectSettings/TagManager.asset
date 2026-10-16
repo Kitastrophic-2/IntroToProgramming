@@ -5,8 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Hazard
-  - Wall
   - Ground
+  - Goal
   layers:
   - Default
   - TransparentFX

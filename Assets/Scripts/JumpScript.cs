@@ -22,11 +22,11 @@ public class JumpScript : MonoBehaviour
     void FixedUpdate()
     {
         direction = Vector3.zero;
-        if (Keyboard.current.leftArrowKey.isPressed)
+        if (Keyboard.current.aKey.isPressed)
         {
             direction += Vector3.left;
         }
-        if (Keyboard.current.rightArrowKey.isPressed)
+        if (Keyboard.current.dKey.isPressed)
         {
             direction += Vector3.right;
         }
