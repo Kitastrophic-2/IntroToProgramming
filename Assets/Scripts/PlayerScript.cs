@@ -9,7 +9,6 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class PlayerScript : MonoBehaviour
 {
-    public bool grounded;
     //These are the player's Variables, the raw info that defines them
     
     //The Rigidbody2D is a component that gives the player physics, and is what we use to move
@@ -29,12 +28,15 @@ public class PlayerScript : MonoBehaviour
     public int Score = 0;
 
     //This is the current player health
-    public int Health = 5;
+    public int Health = 3;
 
     //Float to track cooldown time for the dash?
     public float dashTimer = 0f;
     public float dashReset = 2f;
-    
+
+    //for gravity
+    public bool grounded;
+
     //Start automatically gets triggered once when the objects turns on/the game starts
     void Start()
     {

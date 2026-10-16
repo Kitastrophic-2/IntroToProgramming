@@ -11,11 +11,11 @@ public class JumpScript : MonoBehaviour
     public float jumpForce = 100f;
     public bool isGrounded;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is      created
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         myRB = GetComponent<Rigidbody2D>();
-        isGrounded = false;
+        isGrounded = true;
     }
 
     // Update is called once per frame
@@ -51,6 +51,10 @@ public class JumpScript : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
+        if (collision.gameObject.tag == "Grounded")
+        {
             isGrounded = false;
+
+        }
     }
 }
