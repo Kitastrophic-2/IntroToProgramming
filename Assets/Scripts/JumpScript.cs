@@ -10,6 +10,8 @@ public class JumpScript : MonoBehaviour
     public Rigidbody2D myRB;
     public float jumpForce = 100f;
     public bool isGrounded;
+    //particle system for when the player jumps
+    public ParticleSystem PS;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,8 +40,8 @@ public class JumpScript : MonoBehaviour
         if (Keyboard.current.spaceKey.isPressed && isGrounded)
         {
             myRB.AddForce(Vector3.up * jumpForce);
+            PS.Emit(1);
         }
-
     }
 
     void OnCollisionStay2D(Collision2D collision)
