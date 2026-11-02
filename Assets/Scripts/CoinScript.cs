@@ -9,6 +9,7 @@ public class CoinScript : MonoBehaviour
     //For example, what if the coin teleported to a new location instead of being destroyed?
     public void GetBumped()
     {
+        gameObject.GetComponent<AudioSource>().Play();
         //This destroys the coin
         Destroy(gameObject);
     }
